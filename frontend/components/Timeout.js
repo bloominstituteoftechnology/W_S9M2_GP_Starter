@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-export default function Timeout({ timeoutSeconds = 5 }) {
+export default function Timeout({ timeoutSeconds = 3 }) {
   const [isVisible, setIsVisible] = useState(true)
   const loadTimeRef = useRef(Date.now())
 
