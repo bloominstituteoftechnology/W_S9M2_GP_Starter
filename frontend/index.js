@@ -2,8 +2,8 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, NavLink, Routes, Route } from 'react-router-dom'
 import Webcam from './components/Webcam'
-import Grid from './components/Grid'
-import Stopwatch from './components/Stopwatch'
+import Timeout from './components/Timeout'
+import Todos from './components/Todos'
 import './styles/reset.css'
 import './styles/styles.css'
 
@@ -18,13 +18,13 @@ root.render(
     <div className="routing">
       <nav>
         <NavLink to="webcam">Webcam</NavLink>
-        {/* <NavLink to="stopwatch">Stopwatch</NavLink>
-        <NavLink to="grid">Grid</NavLink> */}
+        <NavLink to="timeout">Timeout</NavLink>
+        <NavLink to="todos">Todos</NavLink>
       </nav>
       <Routes>
         <Route path="webcam" element={<Webcam />} />
-        {/* <Route path="stopwatch" element={<Stopwatch />} />
-        <Route path="grid" element={<Grid />} /> */}
+        <Route path="timeout" element={<Timeout />} />
+        <Route path="todos" element={<Todos />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
