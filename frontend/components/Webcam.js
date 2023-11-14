@@ -12,12 +12,13 @@ export default function Webcam() {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true })
         video.srcObject = stream
         const captureFrame = () => {
-          ctx.drawImage(video, 0, 0, canvas.width / 18, canvas.height / 18)
-          ctx.drawImage(
-            canvas,
-            0, 0, canvas.width / 18, canvas.height / 18,
-            0, 0, canvas.width, canvas.height
-          )
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+          // ctx.drawImage(video, 0, 0, canvas.width / 18, canvas.height / 18)
+          // ctx.drawImage(
+          //   canvas,
+          //   0, 0, canvas.width / 18, canvas.height / 18,
+          //   0, 0, canvas.width, canvas.height
+          // )
           requestAnimationFrame(captureFrame)
         }
         captureFrame()
@@ -29,7 +30,7 @@ export default function Webcam() {
   }, [])
   return (
     <div className="widget">
-      <video style={{ display: 'unset' }} ref={videoRef} autoPlay />
+      <video style={{ display: 'none' }} ref={videoRef} autoPlay />
       <canvas ref={canvasRef} width='640' height='480' />
     </div>
   )
