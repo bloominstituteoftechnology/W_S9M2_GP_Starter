@@ -9,17 +9,8 @@ const initialTodos = [
 export default function Todos() {
   const [todos] = useState(initialTodos)
   const [showAll, setShowAll] = useState(true)
-  const [dark, setDark] = useState(false)
 
-  const olStyle = {
-    color: dark ? 'white' : '#ff4b00',
-    backgroundColor: dark ? '#ff4b00' : 'white',
-  }
-
-  const memoTodos = useMemo(() => {
-    console.log('ugh, extremely slow filtering...')
-    return todos.filter(td => showAll || !td.completed)
-  }, [showAll])
+  const filteredTodos = todos.filter(td => showAll || !td.completed)
 
   return (
     <div className="widget">
@@ -27,12 +18,9 @@ export default function Todos() {
         <button onClick={() => setShowAll(!showAll)}>
           {showAll ? 'Show Incomplete' : 'Show All'}
         </button>
-        <button onClick={() => setDark(!dark)}>
-          {dark ? 'Light Theme' : 'Dark Theme'}
-        </button>
       </div>
-      <ol style={olStyle}>
-        {memoTodos.map(todo => {
+      <ol>
+        {filteredTodos.map(todo => {
           const style = { textDecoration: todo.completed ? 'line-through' : 'none' }
           return <li key={todo.id} style={style}>{todo.task}</li>
         })}
