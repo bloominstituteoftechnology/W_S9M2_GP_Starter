@@ -23,21 +23,20 @@ export default function Todos() {
 
   return (
     <div className="widget">
-      <ol style={olStyle}>
-        {memoTodos.map(todo => (
-          <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-            {todo.task}
-          </li>
-        ))}
-      </ol>
       <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          {showAll ? 'Show Incomplete' : 'Show All'}
+        </button>
         <button onClick={() => setDark(!dark)}>
           {dark ? 'Light Theme' : 'Dark Theme'}
         </button>
-        <button onClick={() => setShowAll(!showAll)}>
-          {showAll ? 'Show Only Incomplete' : 'Show All'}
-        </button>
       </div>
+      <ol style={olStyle}>
+        {memoTodos.map(todo => {
+          const style = { textDecoration: todo.completed ? 'line-through' : 'none' }
+          return <li key={todo.id} style={style}>{todo.task}</li>
+        })}
+      </ol>
     </div>
   )
 }

@@ -13,7 +13,11 @@ export default function Webcam() {
         video.srcObject = stream
         const captureFrame = () => {
           ctx.drawImage(video, 0, 0, canvas.width / 18, canvas.height / 18)
-          ctx.drawImage(canvas, 0, 0, canvas.width / 18, canvas.height / 18, 0, 0, canvas.width, canvas.height)
+          ctx.drawImage(
+            canvas,
+            0, 0, canvas.width / 18, canvas.height / 18,
+            0, 0, canvas.width, canvas.height
+          )
           requestAnimationFrame(captureFrame)
         }
         captureFrame()
