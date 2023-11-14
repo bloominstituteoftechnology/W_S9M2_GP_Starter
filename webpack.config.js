@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
+const path = require('upath')
+const fs = require('fs')
 
 const DEVELOPMENT = 'development'
 const ENV = process.env.NODE_ENV || DEVELOPMENT
@@ -43,6 +44,11 @@ const config = {
     compress: true,
     port: FRONTEND_PORT,
     client: { logging: 'none' },
+    https: {
+      key: fs.readFileSync(path.join(__dirname, 'backend', 'key.pem')),
+      cert: fs.readFileSync(path.join(__dirname, 'backend', 'cert.pem')),
+      passphrase: 'abcd',
+    }
   },
   module: {
     rules: [

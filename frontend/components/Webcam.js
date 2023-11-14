@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 
-export default function Canvas() {
+export default function Webcam() {
   useEffect(() => {
-    
+
   }, [])
   return (
     <div className="widget">

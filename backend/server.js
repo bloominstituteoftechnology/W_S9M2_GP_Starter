@@ -1,27 +1,33 @@
 const express = require('express')
 const cors = require('cors')
-const path = require('path')
+const path = require('upath')
+const fs = require('fs')
+const https = require('https')
 
 const PORT = process.env.PORT || 9009
 
-const server = express()
+const options = {
+  key: fs.readFileSync(path.join(__dirname, 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'cert.pem')),
+  passphrase: 'abcd'
+}
 
-server.use(express.json())
+const app = express()
 
-server.use(express.static(path.join(__dirname, '../dist')))
-
-server.use(cors())
-
-server.get('*', (req, res) => {
+app.use(express.json())
+app.use(express.static(path.join(__dirname, '../dist')))
+app.use(cors())
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'))
 })
-
-server.use((req, res) => {
+app.use((req, res) => {
   res.status(404).json({
     message: `Endpoint [${req.method}] ${req.path} does not exist`,
   })
 })
 
+const server = https.createServer(options, app)
+
 server.listen(PORT, () => {
-  console.log(`listening on ${PORT}`)
+  console.log(`Navigate your browser to https://localhost:${PORT}`)
 })
