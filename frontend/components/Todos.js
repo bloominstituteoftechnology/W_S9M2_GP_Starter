@@ -10,6 +10,7 @@ export default function Todos() {
   const [todos] = useState(initialTodos)
   const [showAll, setShowAll] = useState(true)
 
+  console.log('ugh, filtering todos is expensive')
   const filteredTodos = todos.filter(td => showAll || !td.completed)
 
   return (
